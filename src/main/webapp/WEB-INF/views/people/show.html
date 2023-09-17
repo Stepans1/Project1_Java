@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>One</title>
+</head>
+<body>
+
+<label for="id">ID:</label>
+<h3 id="id" th:text="${person.getId()}"></h3>
+
+<label for="surname">Surname:</label>
+<h3 id="surname" th:text="${person.getSurname()}"></h3>
+
+<label for="DR">Birthday:</label>
+<h3 id="DR" th:text="${person.getBirthday()}"></h3>
+<hr/>
+
+<div th:if="${#lists.isEmpty(book)}">
+    <h3>He hasn't taken the books yet</h3>
+</div>
+<div th:unless="${#lists.isEmpty(book)}">
+    <div th:each="b : ${book}" >
+        <h2 th:text="${b.getName()}+ ', ' +${b.getAuthor}"></h2>
+
+    </div>
+</div>
+
+
+<hr/>
+<a th:href="@{/people/{id}/edit(id=${person.getId()})}"  >edit</a>
+<form th:method="POST" th:action="@{/people/del/{id}(id=${person.getId()})}">
+    <input type="submit" value="Delete"/>
+</form>
+</body>
+</html>

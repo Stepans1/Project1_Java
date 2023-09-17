@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>One</title>
+</head>
+<body>
+
+<label for="id">ID:</label>
+<h3 id="id" th:text="${book.getId()}"></h3>
+
+<label for="name">Name:</label>
+<h3 id="name" th:text="${book.getName()}"></h3>
+
+<label for="author">Author:</label>
+<h3 id="author" th:text="${book.getAuthor()}"></h3>
+
+<label for="year">Year:</label>
+<h3 id="year" th:text="${book.getRealise_year()}"></h3>
+<hr/>
+
+<form th:method="POST" th:action="@{/book/set}">
+    <label for="person">Choose people</label>
+    <select th:field="*{id}" id="person">
+        <option th:each="person:${people}" th:value="${person.getId()}"
+                th:text="${person.getSurname()}"></option>
+    </select>
+
+    <input type="submit" value="set Book ">
+</form>
+
+
+<hr/>
+<a th:href="@{/book/{id}/edit(id=${book.getId()})}"  >edit</a>
+<form th:method="POST" th:action="@{/book/del/{id}(id=${book.getId()})}">
+    <input type="submit" value="Delete"/>
+</form>
+</body>
+</html>
